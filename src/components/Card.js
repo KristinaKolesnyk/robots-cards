@@ -11,12 +11,10 @@ const Card = ({ user, inCrew, onView, onToggleCrew }) => {
                 width="220"
                 height="220"
                 loading="lazy"
-                src={`https://robohash.org/${user.id}`}
+                src={`https://robohash.org/${user.id}?&size=220x220`}
             />
             <div className="mt2">
                 <h2 className="f4 mt2 mb1">{user.name}</h2>
-                <p className="f6 silver mb2">{user.email}</p>
-
                 <div className="badges">
                     <span className="badge" title="Origin">{origin}</span>
                     <span className="badge" title="Rank">

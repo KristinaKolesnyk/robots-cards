@@ -31,8 +31,18 @@ body{
 
 /* full-screen animated stars canvas */
 .starfield{
-    position:fixed; inset:0; z-index:-1;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none; /* чтобы клик проходил сквозь звёзды */
 }
+
+/* добавь, чтобы контент был выше звёзд */
+.app-shell{
+    position: relative;
+    z-index: 1;
+}
+
 
 /* title glow */
 .app-title{
@@ -69,7 +79,7 @@ body{
 
 /* scroll area */
 .scroll-area{
-    max-height: 70vh;
+    height: calc(100vh - 220px);
     overflow: auto;
     padding: 0 1rem 2rem;
 }

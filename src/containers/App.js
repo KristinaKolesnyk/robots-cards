@@ -5,6 +5,8 @@ import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import RobotPassport from '../components/RobotPassport';
 import robotsData from '../data/robots.json';
+import Starfield from '../components/Starfield';
+
 
 class App extends Component {
     constructor() {
@@ -46,6 +48,7 @@ class App extends Component {
 
         return (
             <div className="app-shell tc">
+                <Starfield />
                 <h1 className="app-title">ROBOFRIENDS</h1>
                 <p className="subtitle">Galactic Catalog of Friendly Robots</p>
                 <SearchBox searchChange={this.onSearchChange}/>
