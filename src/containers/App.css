@@ -107,3 +107,59 @@ body{
 
 /* loading state */
 .loading{ display:grid; place-items:center; height:100vh; }
+
+/* microcopy */
+.subtitle{ margin-top:-.5rem; opacity:.85; }
+
+/* badges */
+.badges{ display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; }
+.badge{
+    font-size:.72rem; padding:.28rem .5rem; border-radius:999px;
+    background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(6px);
+}
+
+/* buttons */
+.btn{
+    border:1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.08);
+    padding:.55rem .9rem; border-radius:10px; color:#eaf6ff; cursor:pointer;
+    transition:transform .15s, box-shadow .2s, border-color .2s;
+    backdrop-filter: blur(6px);
+    margin:0 .25rem;
+}
+.btn:hover{
+    transform: translateY(-2px);
+    border-color: rgba(0,229,255,.55);
+    box-shadow: 0 0 0 3px rgba(0,229,255,.18), 0 0 20px rgba(0,229,255,.28);
+}
+.btn--ghost{
+    background: transparent;
+}
+
+/* modal */
+.modal{ position:fixed; inset:0; display:grid; place-items:center; z-index:50; }
+.modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.55); }
+.modal__card{
+    position:relative; z-index:1; width:min(860px,94vw);
+    background: rgba(16,24,40,.7); border:1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(10px); border-radius:16px; box-shadow:0 20px 70px rgba(0,0,0,.5);
+    padding:1.2rem 1.2rem 0.8rem;
+}
+.modal__close{
+    position:absolute; top:.4rem; right:.6rem; font-size:1.8rem; border:0; background:transparent; color:#cfe8ff; cursor:pointer;
+}
+.modal__body{ display:flex; gap:1.2rem; align-items:flex-start; }
+.modal__body img{ border-radius:12px; display:block; filter: drop-shadow(0 10px 20px rgba(0,255,255,.25)); }
+.modal__text{ text-align:left; }
+.passport{ display:grid; grid-template-columns: 140px 1fr; gap:.4rem .8rem; }
+.passport dt{ color:#a6c9ff; }
+.passport dd{ margin:0; }
+.passport .wide{ grid-column: 1 / -1; }
+.modal__note{ opacity:.7; font-size:.8rem; text-align:center; margin-top:.8rem; }
+
+/* layout helpers */
+.empty-state{ padding:2rem 0; opacity:.85; }
+.flex{ display:flex; }
+.justify-center{ justify-content:center; }
+.gap8{ gap:.5rem; }

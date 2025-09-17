@@ -1,10 +1,16 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ robots }) => (
+const CardList = ({ robots, onView, onToggleCrew, crewIds }) => (
     <div className="cards-grid">
         {robots.map((user) => (
-            <Card key={user.id} id={user.id} name={user.name} email={user.email} />
+            <Card
+                key={user.id}
+                user={user}
+                inCrew={crewIds.has(user.id)}
+                onView={onView}
+                onToggleCrew={onToggleCrew}
+            />
         ))}
     </div>
 );
