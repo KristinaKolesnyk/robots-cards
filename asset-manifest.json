@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/robots-cards/static/css/main.f646ada5.css",
+    "main.js": "/robots-cards/static/js/main.61aae925.js",
+    "static/js/453.2a67087d.chunk.js": "/robots-cards/static/js/453.2a67087d.chunk.js",
+    "static/media/Constance-7BLXE.woff": "/robots-cards/static/media/Constance-7BLXE.258d15264564f060a1e4.woff",
+    "index.html": "/robots-cards/index.html",
+    "main.f646ada5.css.map": "/robots-cards/static/css/main.f646ada5.css.map",
+    "main.61aae925.js.map": "/robots-cards/static/js/main.61aae925.js.map",
+    "453.2a67087d.chunk.js.map": "/robots-cards/static/js/453.2a67087d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f646ada5.css",
+    "static/js/main.61aae925.js"
+  ]
+}
