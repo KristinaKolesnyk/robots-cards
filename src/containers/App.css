@@ -1,23 +1,37 @@
-
+/* ---------------- Fonts ---------------- */
 @font-face {
     font-family: 'CONSTANCE Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('CONSTANCE Regular'), url('../components/Constance-7BLXE.woff') format('woff');
+    src: local('CONSTANCE Regular'),
+    url('../components/Constance-7BLXE.woff') format('woff');
 }
 
-h1{
-    font-family: 'CONSTANCE Regular';
-    font-weight: 200;
-    color: #0ccac4
-}
+/* ---------------- Design Tokens ---------------- */
 :root{
+    /* colors */
     --bg0:#0b1020;
     --bg1:#0a1b2e;
     --accent:#00e5ff;
     --accent2:#8a5cf6;
     --text:#e6f6ff;
+
+    /* card & buttons */
+    --card-h: 440px;          /* общая высота карточки (можно 440) */
+    --card-pad: 14px;
+    --card-radius: 16px;
+    --btn-h: 56px;
+    --btn-gap: 10px;
+    --actions-bottom-pad: 10px;
+
+    /* misc spacing */
+    --gap-1: .5rem;
+    --gap-2: 1.2rem;
 }
+
+/* ---------------- Base ---------------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 
 body{
     margin:0;
@@ -29,21 +43,26 @@ body{
     min-height:100vh;
 }
 
-/* full-screen animated stars canvas */
+/* legacy h1 (оставим на всякий случай): */
+h1{
+    font-family: 'CONSTANCE Regular';
+    font-weight: 200;
+    color: #0ccac4;
+}
+
+/* ---------------- Starfield Layer ---------------- */
 .starfield{
     position: fixed;
     inset: 0;
     z-index: 0;
-    pointer-events: none; /* чтобы клик проходил сквозь звёзды */
+    pointer-events: none;
 }
-
-/* добавь, чтобы контент был выше звёзд */
 .app-shell{
     position: relative;
     z-index: 1;
 }
 
-/* title glow */
+/* ---------------- Title ---------------- */
 .app-title{
     font-family: 'CONSTANCE Regular', system-ui, sans-serif;
     letter-spacing:.08em;
@@ -56,8 +75,9 @@ body{
     color: transparent;
     text-shadow: 0 0 18px rgba(0,238,255,.45);
 }
+.subtitle{ margin-top:-.5rem; opacity:.85; }
 
-/* search */
+/* ---------------- Search ---------------- */
 .search-wrap{ display:flex; justify-content:center; margin-bottom: 1rem; }
 .search-input{
     width:min(560px, 90vw);
@@ -76,77 +96,145 @@ body{
     box-shadow: 0 0 0 3px rgba(0,229,255,.18), 0 0 22px rgba(0,229,255,.32);
 }
 
-/* scroll area */
+/* ---------------- Scroll Area ---------------- */
 .scroll-area{
     height: calc(100vh - 220px);
     overflow: auto;
     padding: 0 1rem 2rem;
 }
 
-/* grid */
+/* ---------------- Grid ---------------- */
 .cards-grid{
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.2rem;
+    gap: var(--gap-2);
+    align-items: start;
 }
 
-/* glass cards with neon glow */
+/* ---------------- Card ---------------- */
 .robo-card{
     background: rgba(16,24,40,.35);
     border: 1px solid rgba(255,255,255,.12);
     backdrop-filter: blur(8px);
-    box-shadow:
-            0 10px 30px rgba(0,0,0,.35),
-            0 0 0 .5px rgba(121,245,255,.28);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 .5px rgba(121,245,255,.28);
     transition: transform .22s ease, box-shadow .22s ease, border-color .22s;
+    /* fixed sizing & rounded */
+    height: var(--card-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--card-pad);
+    border-radius: var(--card-radius);
+    overflow: hidden;
 }
 .robo-card:hover{
     transform: translateY(-6px);
     border-color: rgba(121,245,255,.45);
-    box-shadow:
-            0 20px 40px rgba(0,0,0,.45),
-            0 0 16px 2px rgba(0,255,255,.35);
+    box-shadow: 0 20px 40px rgba(0,0,0,.45), 0 0 16px 2px rgba(0,255,255,.35);
 }
+
+/* avatar */
 .robo-card img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     display:block;
     margin: 0 auto;
     filter: drop-shadow(0 6px 18px rgba(0,255,255,.25));
     border-radius: 10px;
 }
 
-/* loading state */
-.loading{ display:grid; place-items:center; height:100vh; }
+/* text + actions wrapper */
+.robo-card .mt2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 auto;
+    gap: 10px;
+}
 
-/* microcopy */
-.subtitle{ margin-top:-.5rem; opacity:.85; }
+/* title clamp */
+.robo-card h2{
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin: 8px 0 4px;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-/* badges */
-.badges{ display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; }
+/* optional subline clamp (если появится p под заголовком) */
+.robo-card p{
+    margin: 0 0 8px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* badges (если ты их вернёшь) */
+.badges{
+    display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center;
+    max-height: 56px; overflow: hidden;
+}
 .badge{
     font-size:.72rem; padding:.28rem .5rem; border-radius:999px;
     background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
     backdrop-filter: blur(6px);
 }
 
-/* buttons */
+/* actions pinned to bottom; grid for responsive layout */
+.robo-card .robo-card__actions{
+    margin-top: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;     /* mobile: one per row */
+    gap: var(--btn-gap);
+    padding-bottom: var(--actions-bottom-pad);
+}
+@media (min-width: 680px){
+    .robo-card .robo-card__actions{
+        grid-template-columns: 1fr 1fr; /* desktop: two in a row */
+        justify-items: center;
+    }
+}
+
+/* Buttons (inside card) */
 .btn{
     border:1px solid rgba(255,255,255,.25);
     background: rgba(255,255,255,.08);
-    padding:.55rem .9rem; border-radius:10px; color:#eaf6ff; cursor:pointer;
-    transition:transform .15s, box-shadow .2s, border-color .2s;
+    color:#eaf6ff;
+    padding: .55rem .9rem;
+    border-radius:10px;
+    cursor:pointer;
+    transition: transform .15s, box-shadow .2s, border-color .2s;
     backdrop-filter: blur(6px);
-    margin:0 .25rem;
+    /* unify height & layout */
+    height: var(--btn-h);
+    width: 100%;
+    padding: 0 12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0; /* чтобы grid-gap работал ровно */
 }
 .btn:hover{
     transform: translateY(-2px);
     border-color: rgba(0,229,255,.55);
     box-shadow: 0 0 0 3px rgba(0,229,255,.18), 0 0 20px rgba(0,229,255,.28);
 }
-.btn--ghost{
-    background: transparent;
-}
+.btn--ghost{ background: transparent; }
 
-/* modal */
+/* ---------------- Loading ---------------- */
+.loading{ display:grid; place-items:center; height:100vh; }
+
+/* ---------------- Modal ---------------- */
 .modal{ position:fixed; inset:0; display:grid; place-items:center; z-index:50; }
 .modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.55); }
 .modal__card{
@@ -167,8 +255,35 @@ body{
 .passport .wide{ grid-column: 1 / -1; }
 .modal__note{ opacity:.7; font-size:.8rem; text-align:center; margin-top:.8rem; }
 
-/* layout helpers */
+/* ---------------- Helpers ---------------- */
 .empty-state{ padding:2rem 0; opacity:.85; }
 .flex{ display:flex; }
 .justify-center{ justify-content:center; }
 .gap8{ gap:.5rem; }
+
+/* ---------------- Responsive tweaks ---------------- */
+@media (max-width: 480px){
+    :root{
+        --card-h: 440px;         /* карточки компактнее на мобильных */
+    }
+}
+
+.robo-card .btn{
+    width: 100%;
+    height: var(--btn-h);
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* ключи для длинного текста */
+    white-space: normal;      /* разрешить перенос */
+    line-height: 1.15;        /* плотнее, чтобы 2 строки влезли красиво */
+    word-break: break-word;   /* если слово очень длинное */
+    overflow: visible;        /* больше не скрываем текст */
+    text-overflow: clip;      /* без многоточий */
+    font-size: 0.95rem;       /* чуть компактнее для баланса */
+    text-align: center;       /* центрируем многострочный текст */
+}
+
+

@@ -1,26 +1,29 @@
 import React from "react";
-import {buildRobotMeta} from "../utils/legend";
 
-const Card = ({user, inCrew, onView, onToggleCrew}) => {
-    const {origin, rank, stars, specialty} = buildRobotMeta(user);
+const Card = ({ user, inCrew, onView, onToggleCrew }) => {
+    const avatarSrc = `https://robohash.org/${user.avatarSeed || user.id}?&size=250x250`;
 
     return (
-        <div className="tc dib br3 pa3 ma2 shadow-5 robo-card">
+        <div className="robo-card">
             <img
                 alt={`robot ${user.name}`}
-                width="220"
-                height="220"
                 loading="lazy"
-                src={`https://robohash.org/${user.id}?&size=220x220`}
+                width="250"
+                height="250"
+                src={avatarSrc}
             />
             <div className="mt2">
                 <h2 className="f4 mt2 mb1">{user.name}</h2>
-                
 
-                <div className="mt3 flex justify-center gap8">
-                    <button className="btn" onClick={() => onView(user)}>View Passport</button>
-                    <button className={`btn ${inCrew ? "btn--ghost" : ""}`}
-                            onClick={() => onToggleCrew(user)}>
+                <div className="robo-card__actions">
+                    <button type="button" className="btn" onClick={() => onView(user)}>
+                        View Passport
+                    </button>
+                    <button
+                        type="button"
+                        className={`btn ${inCrew ? "btn--ghost" : ""}`}
+                        onClick={() => onToggleCrew(user)}
+                    >
                         {inCrew ? "Remove from Crew" : "Add to Crew"}
                     </button>
                 </div>
